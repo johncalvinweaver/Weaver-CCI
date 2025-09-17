@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: Weaver CCI API
+  version: 0.1.0
+paths:
+  /cci/score:
+    post:
+      summary: Compute Weaver CCI from submission
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './cci_schema.json'
+      responses:
+        '200':
+          description: CCI result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  work_id: { type: string }
+                  human_pct: { type: number }
+                  ai_pct: { type: number }
+                  categories:
+                    type: object
+                    properties:
+                      human_conception: { type: number }
+                      human_curation: { type: number }
+                      ai_generation: { type: number }
+                      ai_structure: { type: number }
+                      ai_voice_emulation: { type: number }
+                  version: { type: string }
+  /labels/svg:
+    post:
+      summary: Generate square SVG label
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [human_pct, ai_pct, title, work_id]
+              properties:
+                human_pct: { type: number }
+                ai_pct: { type: number }
+                title: { type: string }
+                work_id: { type: string }
+      responses:
+        '200':
+          description: SVG
+          content:
+            image/svg+xml:
+              schema:
+                type: string
