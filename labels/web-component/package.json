@@ -1,0 +1,1 @@
+{"name": "weaver-cci-label","version": "0.1.0","description": "Web Component for rendering square Weaver CCI labels","type": "module","scripts": {"start": "npx http-server . -p 8080"}}
